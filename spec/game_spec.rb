@@ -11,4 +11,10 @@ describe Game do
     game.pins([2] * 20)
     expect(game.score).to eq 40
   end
+
+  it 'scores a spare in a game' do
+    game.pins([7,3,5] + [0] * 17)
+    expect(game.score).to eq 20
+  end
+
 end
