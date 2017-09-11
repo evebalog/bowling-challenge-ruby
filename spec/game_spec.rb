@@ -17,4 +17,9 @@ describe Game do
     expect(game.score).to eq 20
   end
 
+  it 'scores a strike' do
+    game.pins([10,4,1] + [0] * 17)
+    expect(game.score).to eq 20
+  end
+
 end

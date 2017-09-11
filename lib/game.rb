@@ -17,12 +17,16 @@ class Game
     while frame < 10
       if spare?
         score += 10 + bonus_for_spare
+        @first_roll_in_frame += 2
+      elsif strike?
+        score += 10 + bonus_for_strike
+        @first_roll_in_frame += 1
       else
         score += standard_score
+        @first_roll_in_frame += 2
       end
 
       frame += 1
-      @first_roll_in_frame += 2
     end
 
     score
@@ -30,8 +34,16 @@ class Game
 
   private
 
+  def strike?
+    @rolls[first_roll_in_frame] == 10
+  end
+
   def spare?
     @rolls[first_roll_in_frame] + @rolls[first_roll_in_frame + 1] == 10
+  end
+
+  def bonus_for_strike
+    @rolls[first_roll_in_frame + 1] + @rolls[first_roll_in_frame + 2]
   end
 
   def bonus_for_spare
